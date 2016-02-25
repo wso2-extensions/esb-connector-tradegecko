@@ -54,19 +54,19 @@ Steps to follow in setting integration test.
 
  5. Update the Tradegecko properties file at location "{TRADEGECKO_HOME}/src/test/resources/artifacts/ESB/connector/config" as below.
 	
-	i) 		apiUrl					- Use the API URL as "https://api.tradegecko.com".
-	ii)		accessToken				- Access Token obtained by following the steps in 4.
-	iii) 	productId				- A product ID of a valid product.
-	iv)		orderId					- ID of an order which is in 'finalized' state for mandatory test case.
-	v)		orderLineItemId 		- ID of a line item of the order mapped to the order ID in iv).
-	vi) 	orderIdOptional 		- ID of an order which is in 'finalized' state for optional test case.
-	vii)	orderLineItemIdOptional - ID of a line item of the order mapped to the order ID in vi).
-	viii)	billingAddressId		- Billing address ID of customer related to the order in vi).
-	ix)		shippingAddressId		- Shipping address ID of customer related to the order in vi).
-	x)		paymentTermId			- ID for a valid payment term from your account.
-	xi)		stockVariantId			- Variant ID of a valid product for stock adjustment mandatory test case.
+	 i) apiUrl			- Use the API URL as "https://api.tradegecko.com".
+	ii) accessToken			- Access Token obtained by following the steps in 4.
+       iii) productId			- A product ID of a valid product.
+	iv) orderId			- ID of an order which is in 'finalized' state for mandatory test case.
+	 v) orderLineItemId 		- ID of a line item of the order mapped to the order ID in iv).
+	vi) orderIdOptional 		- ID of an order which is in 'finalized' state for optional test case.
+       vii) orderLineItemIdOptional     - ID of a line item of the order mapped to the order ID in vi).
+      viii) billingAddressId		- Billing address ID of customer related to the order in vi).
+	ix) shippingAddressId		- Shipping address ID of customer related to the order in vi).
+	 x) paymentTermId		- ID for a valid payment term from your account.
+	xi) stockVariantId		- Variant ID of a valid product for stock adjustment mandatory test case.
 	xii)	optionalStockVariantId	- Variant ID of a valid product for stock adjustment optional test case.
-	xiii)	stockLocationId			- A valid location ID from your account. 
+	xiii)	stockLocationId		- A valid location ID from your account. 
 	
  6. Navigate to "{TRADEGECKO_HOME}" and run the following command.
       $ mvn clean install
