@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ ~  Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ ~
+ ~  WSO2 Inc. licenses this file to you under the Apache License,
+ ~  Version 2.0 (the "License"); you may not use this file except
+ ~  in compliance with the License.
+ ~  You may obtain a copy of the License at
+ ~
+ ~    http://www.apache.org/licenses/LICENSE-2.0
+ ~
+ ~  Unless required by applicable law or agreed to in writing,
+ ~  software distributed under the License is distributed on an
+ ~  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ ~  KIND, either express or implied.  See the License for the
+ ~  specific language governing permissions and limitations
+ ~  under the License.
+-->
+<proxy xmlns="http://ws.apache.org/ns/synapse" name="tradegecko"
+       transports="https,http" statistics="disable" trace="disable"
+       startOnLoad="true">
+    <target>
+        <inSequence onError="tradegecko_faultsequence">
+            <property name="apiUrl" expression="json-eval($.apiUrl)"/>
+            <property name="accessToken" expression="json-eval($.accessToken)"/>
+
+            <!-- getProduct -->
+            <property name="productId" expression="json-eval($.productId)"/>
+
+            <!-- createInvoice -->
+            <property name="orderId" expression="json-eval($.orderId)"/>
+            <property name="billingAddressId" expression="json-eval($.billingAddressId)"/>
+            <property name="shippingAddressId" expression="json-eval($.shippingAddressId)"/>
+            <property name="paymentTermId" expression="json-eval($.paymentTermId)"/>
+            <property name="invoicedAt" expression="json-eval($.invoicedAt)"/>
+            <property name="dueAt" expression="json-eval($.dueAt)"/>
+            <property name="notes" expression="json-eval($.notes)"/>
+            <property name="invoiceLineItems" expression="json-eval($.invoiceLineItems)"/>
+
+            <!-- createStockAdjustment -->
+            <property expression="json-eval($.adjustmentNumber)" name="adjustmentNumber"/>
+            <property expression="json-eval($.notes)" name="notes"/>
+            <property expression="json-eval($.reason)" name="reason"/>
+            <property expression="json-eval($.stockAdjustmentLineItems)" name="stockAdjustmentLineItems"/>
+            <property expression="json-eval($.stockLocationId)" name="stockLocationId"/>
+
+            <!-- createStockAdjustmentLineItem -->
+            <property expression="json-eval($.stockAdjustmentId)" name="stockAdjustmentId"/>
+            <property expression="json-eval($.stockAdjustmentLineItemId)" name="stockAdjustmentLineItemId"/>
+            <property expression="json-eval($.variantId)" name="variantId"/>
+            <property expression="json-eval($.quantity)" name="quantity"/>
+            <property expression="json-eval($.position)" name="position"/>
+
+
+            <!-- createInvoiceLineItem -->
+            <property name="invoiceId" expression="json-eval($.invoiceId)"/>
+            <property name="orderLineItemId" expression="json-eval($.orderLineItemId)"/>
+            <property name="quantity" expression="json-eval($.quantity)"/>
+            <property name="position" expression="json-eval($.position)"/>
+
+            <tradegecko.init>
+                <apiUrl>{$ctx:apiUrl}</apiUrl>
+                <accessToken>{$ctx:accessToken}</accessToken>
+            </tradegecko.init>
+
+            <switch source="get-property('transport', 'Action')">
+                <case regex="urn:listProducts">
+                    <tradegecko.listProducts/>
+                </case>
+                <case regex="urn:getProduct">
+                    <tradegecko.getProduct>
+                        <productId>{$ctx:productId}</productId>
+                    </tradegecko.getProduct>
+                </case>
+                <case regex="urn:createInvoice">
+                    <tradegecko.createInvoice>
+                        <orderId>{$ctx:orderId}</orderId>
+                        <billingAddressId>{$ctx:billingAddressId}</billingAddressId>
+                        <shippingAddressId>{$ctx:shippingAddressId}</shippingAddressId>
+                        <paymentTermId>{$ctx:paymentTermId}</paymentTermId>
+                        <invoicedAt>{$ctx:invoicedAt}</invoicedAt>
+                        <dueAt>{$ctx:dueAt}</dueAt>
+                        <notes>{$ctx:notes}</notes>
+                        <invoiceLineItems>{$ctx:invoiceLineItems}</invoiceLineItems>
+                    </tradegecko.createInvoice>
+                </case>
+                <case regex="urn:createInvoiceLineItem">
+                    <tradegecko.createInvoiceLineItem>
+                        <invoiceId>{$ctx:invoiceId}</invoiceId>
+                        <orderLineItemId>{$ctx:orderLineItemId}</orderLineItemId>
+                        <quantity>{$ctx:quantity}</quantity>
+                        <position>{$ctx:position}</position>
+                    </tradegecko.createInvoiceLineItem>
+                </case>
+                <case regex="urn:createStockAdjustment">
+                    <tradegecko.createStockAdjustment>
+                        <adjustmentNumber>{$ctx:adjustmentNumber}</adjustmentNumber>
+                        <notes>{$ctx:notes}</notes>
+                        <reason>{$ctx:reason}</reason>
+                        <stockAdjustmentLineItems>{$ctx:stockAdjustmentLineItems}</stockAdjustmentLineItems>
+                        <stockLocationId>{$ctx:stockLocationId}</stockLocationId>
+                    </tradegecko.createStockAdjustment>
+                </case>
+                <case regex="urn:createStockAdjustmentLineItem">
+                    <tradegecko.createStockAdjustmentLineItem>
+                        <stockAdjustmentId>{$ctx:stockAdjustmentId}</stockAdjustmentId>
+                        <stockAdjustmentLineItemId>{$ctx:stockAdjustmentLineItemId}</stockAdjustmentLineItemId>
+                        <variantId>{$ctx:variantId}</variantId>
+                        <quantity>{$ctx:quantity}</quantity>
+                        <position>{$ctx:position}</position>
+                    </tradegecko.createStockAdjustmentLineItem>
+                </case>
+            </switch>
+            <respond/>
+        </inSequence>
+        <outSequence>
+            <log/>
+            <send/>
+        </outSequence>
+    </target>
+    <description/>
+</proxy>
