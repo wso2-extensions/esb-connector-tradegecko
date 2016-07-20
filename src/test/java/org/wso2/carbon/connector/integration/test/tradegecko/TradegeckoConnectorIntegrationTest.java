@@ -18,9 +18,6 @@
 
 package org.wso2.carbon.connector.integration.test.tradegecko;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.testng.Assert;
@@ -28,6 +25,9 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.connector.integration.test.base.ConnectorIntegrationTestBase;
 import org.wso2.connector.integration.test.base.RestResponse;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class TradegeckoConnectorIntegrationTest extends ConnectorIntegrationTestBase {
 
@@ -447,7 +447,6 @@ public class TradegeckoConnectorIntegrationTest extends ConnectorIntegrationTest
         RestResponse<JSONObject> apiRestResponse = sendJsonRestRequest(apiEndPoint, "POST", apiRequestHeadersMap,
                 "api_createStockAdjustmentLineItem_negative.json", parametersMap);
 
-        Assert.assertEquals(esbRestResponse.getHttpStatusCode(), 500);
-        Assert.assertEquals(apiRestResponse.getHttpStatusCode(), 500);
+        Assert.assertEquals(esbRestResponse.getHttpStatusCode(), apiRestResponse.getHttpStatusCode());
     }
 }

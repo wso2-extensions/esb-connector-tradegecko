@@ -7,12 +7,7 @@
   "stockAdjustmentLineItems": [
     {
       "quantity": 10,
-      "variant_id":
-      %
-      s
-      (
-      stockVariantId
-      )
+      "variant_id":%s(stockVariantId)
     }
   ],
   "stockLocationId": "%s(stockLocationId)"

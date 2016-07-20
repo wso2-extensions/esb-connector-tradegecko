@@ -10,7 +10,7 @@ Tested Platform:
 
  - Microsoft WINDOWS V-7
  - UBUNTU 14.04
- - WSO2 ESB 4.9.0
+ - WSO2 ESB 5.0.0-SNAPSHOT
 
 Note:
 	This test suite can be executed based on two scenarios.
@@ -19,21 +19,22 @@ Note:
 
 Steps to follow in setting integration test.
 
- 1. Download ESB 4.9.0 from official website.
+ 1. Download ESB 5.0.0-SNAPSHOT from official website. Extract the ESB and put "-XX:-UseSplitVerifier" under $JVM_MEM_OPTS into {ESB_HOME}/bin/wso2server.sh.
 
  2. Follow the below mentioned steps for adding valid certificate to access Tradegecko API over https.
 
 	i) 	 Extract the certificate from browser(Mozilla Firefox) by navigating to https://api.tradegecko.com
 	   
-	ii)  Go to new ESB 4.9.0 folder and place the downloaded certificate in "{TRADEGECKO_HOME}/repository/resources/security/"
+	ii)  Go to new ESB 5.0.0-SNAPSHOT folder and place the downloaded certificate in "{TRADEGECKO_HOME}/repository/resources/security/"
 
 	iii) Navigate to "{TRADEGECKO_HOME}/repository/resources/security/" using command prompt and execute keytool -importcert -file CERT_FILE_NAME -keystore client-truststore.jks -alias "CERT_NAME" in command line to import Tradegecko certificate in to keystore.
 		 Give "wso2carbon" as password. Press "Y" to complete certificate import process.
 		 
 		 NOTE : CERT_FILE_NAME is the file name which was extracted from Tradegecko. (e.g. *.tradegecko.com)
 			    CERT_NAME is arbitrary name for the certificate. (e.g. Tradegecko)
+    iv)
 
- 3. Compress modified ESB as wso2esb-4.9.0.zip and copy that zip file in to location "{TRADEGECKO_HOME}/repository/".
+ 3. Compress modified ESB as wso2esb-5.0.0-SNAPSHOT.zip and copy that zip file in to location "{TRADEGECKO_HOME}/repository/".
 
  4. Prerequisites for Tradegecko Connector Integration Testing
 
@@ -56,12 +57,12 @@ Steps to follow in setting integration test.
 	
 	 i) apiUrl			- Use the API URL as "https://api.tradegecko.com".
 	ii) accessToken			- Access Token obtained by following the steps in 4.
-       iii) productId			- A product ID of a valid product.
+    iii) productId			- A product ID of a valid product.
 	iv) orderId			- ID of an order which is in 'finalized' state for mandatory test case.
 	 v) orderLineItemId 		- ID of a line item of the order mapped to the order ID in iv).
 	vi) orderIdOptional 		- ID of an order which is in 'finalized' state for optional test case.
-       vii) orderLineItemIdOptional     - ID of a line item of the order mapped to the order ID in vi).
-      viii) billingAddressId		- Billing address ID of customer related to the order in vi).
+    vii) orderLineItemIdOptional     - ID of a line item of the order mapped to the order ID in vi).
+    viii) billingAddressId		- Billing address ID of customer related to the order in vi).
 	ix) shippingAddressId		- Shipping address ID of customer related to the order in vi).
 	 x) paymentTermId		- ID for a valid payment term from your account.
 	xi) stockVariantId		- Variant ID of a valid product for stock adjustment mandatory test case.
