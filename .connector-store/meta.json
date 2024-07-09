@@ -1,0 +1,20 @@
+{
+    "name": "TradeGecko",
+    "owner": "WSO2",
+    "category": "E-commerce",
+    "documentationUrl": "https://docs.wso2.com/display/ESBCONNECTORS/TradeGecko+Connector",
+    "description": "The TradeGecko connector allows you to access the TradeGecko REST API through the WSO2 ESB. TradeGecko is a cloud-based inventory and sales management SaaS (Software-as-a-Service) application for small- and medium-sized businesses. It is designed with the intention of being a more social and engaging method of managing your business, with an emphasis on team engagement, workflows, and activity feeds.",
+    "status": "Unsupported",
+    "labels": [
+        "connector"
+    ],
+    "releases": [
+        {
+            "tagName": "v1.0.0",
+            "products": [
+                "\"ESB 4.9.0\""
+            ],
+            "isHidden": false
+        }
+    ]
+}
